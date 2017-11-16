@@ -21,11 +21,6 @@ public class Log3 implements IConstant {
             System.out.printf("Only %d nodes are allowed, no more!\n", NODE_LIMIT);
             hz.shutdown();
         }
-        if (size == 1) {
-            System.out.println("We are started");
-        } else {
-            System.out.println("Log was printed");
-        }
+        System.out.println(size == 1 ? "We are started!" : "Log was printed!");
     }
-
 }
