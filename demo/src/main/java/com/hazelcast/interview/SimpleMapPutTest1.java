@@ -15,8 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 
 /**
- * A simple test of a map
- * Having the caller to print stats based on time elapsed since last print
+ * A simple test of a map Having the caller to print stats based on time elapsed since last print
  */
 public final class SimpleMapPutTest1 {
 
@@ -97,7 +96,7 @@ public final class SimpleMapPutTest1 {
     private class Stats {
 
         private AtomicLong puts = new AtomicLong();
-        private AtomicLong lastPutTime = new AtomicLong();
+        private long lastPutTime;
         private Lock lock;
 
         long doIncrement() {
@@ -105,8 +104,8 @@ public final class SimpleMapPutTest1 {
             lock.lock();
             try {
                 long currentTime = System.currentTimeMillis();
-                if (currentTime - lastPutTime.get() >= (STATS_SECONDS * 1000)) {
-                    lastPutTime.set(currentTime);
+                if ((currentTime - lastPutTime) >= (STATS_SECONDS * 1000)) {
+                    lastPutTime = currentTime;
                     printAndReset();
                 }
                 return stats.puts.incrementAndGet();
